@@ -23,5 +23,11 @@ void get_path_string(char **tmp_evnp, char *bin_path);
 void insert_path_str_to_search(char *path_str);
 void handle_signal (int signo);
 char *_memset(char *s, char b, unsigned int n);
+char *_memcpy(char *dest, char *src, unsigned int n);
 int attach_path(char *cmd);
+void copy_envp(char **envp);
+void parse(char *line, char **argv);
+void execute(char **argv);
+static char *search_path[10];
+
 #endif

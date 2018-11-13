@@ -1,3 +1,4 @@
+#include "shell.h"
 /**
  * _memset - fills memory with a constant byte
  * @s: memory area pointed to.
@@ -5,15 +6,12 @@
  * @n: size of memory area to fill
  * Return: pointer to s
  */
-char *_memset(char *s, char b, unsigned int n)
+char *_memset(void *s, int b, size_t n)
 {
-	unsigned int counter;
+	unsigned char* p;
 
-	counter = 0;
-	while (counter < n)
-	{
-		*(s + counter) = b;
-		counter++;
-	}
+	p = s;
+	while(n--)
+		*p++ = (unsigned char)b;
 	return (s);
 }

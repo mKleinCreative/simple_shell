@@ -8,10 +8,9 @@ static char *my_argv[100];
 void handle_signal(int signo)
 {
 	(void)signo;
-	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 34);
+	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 	fflush(stdout);
 }
-
 
 void insert_pathstr_to_search(char *pathstr)
 {
@@ -23,7 +22,7 @@ void insert_pathstr_to_search(char *pathstr)
 		tmp++;
 	tmp++;
 
-	while(*tmp != '\0')
+	while (*tmp != '\0')
 	{
 		if (*tmp == ':')
 		{
@@ -50,10 +49,12 @@ void fill_argv(char *tmp_argv)
 	(void)my_envp;
 	copy_argv = tmp_argv;
 	_memset(ret, 0, 100);
-	while(*copy_argv != '\0') {
+	while (*copy_argv != '\0')
+	{
 		if (index == 10)
 			break;
-		if (*copy_argv == ' ') {
+		if (*copy_argv == ' ')
+		{
 			if (my_argv[index] == NULL)
 				my_argv[index] = (char *)malloc(sizeof(char) * _strlen(ret) + 1);
 			else
@@ -236,6 +237,8 @@ int main(int argc, char *argv[], char *envp[])
 	free(tmp);
 	free(cmd);
 	free(pathstr);
+	for (i = 0; my_argv[i] != NULL; i++)
+		free(my_argv[i]);
 	for (i = 0; my_envp[i] != NULL; i++)
 		free(my_envp[i]);
 	for (i = 0; i < 10; i++)

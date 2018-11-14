@@ -5,6 +5,11 @@ static char *my_envp[100];
 static char *search_path[10];
 static char *my_argv[100];
 
+/**
+ * handle_signal - Handle signal
+ * @signo: signo
+ * Return: Nothing
+ */
 void handle_signal(int signo)
 {
 	(void)signo;
@@ -12,7 +17,11 @@ void handle_signal(int signo)
 	fflush(stdout);
 }
 
-
+/**
+ * insert_pathstr_to_search - Insert pathstring to search
+ * @pathstr: pathstr
+ * Return: Nothing
+ */
 void insert_pathstr_to_search(char *pathstr)
 {
 	int index = 0;
@@ -23,7 +32,7 @@ void insert_pathstr_to_search(char *pathstr)
 		tmp++;
 	tmp++;
 
-	while(*tmp != '\0')
+	while (*tmp != '\0')
 	{
 		if (*tmp == ':')
 		{
@@ -41,6 +50,11 @@ void insert_pathstr_to_search(char *pathstr)
 	}
 }
 
+/**
+ * fill_argv - Fill argv
+ * @tmp_argv: temporary argv
+ * Return: Nothing
+ */
 void fill_argv(char *tmp_argv)
 {
 	char *copy_argv;
@@ -50,10 +64,12 @@ void fill_argv(char *tmp_argv)
 	(void)my_envp;
 	copy_argv = tmp_argv;
 	_memset(ret, 0, 100);
-	while(*copy_argv != '\0') {
+	while (*copy_argv != '\0')
+	{
 		if (index == 10)
 			break;
-		if (*copy_argv == ' ') {
+		if (*copy_argv == ' ')
+		{
 			if (my_argv[index] == NULL)
 				my_argv[index] = (char *)malloc(sizeof(char) * _strlen(ret) + 1);
 			else
@@ -75,6 +91,11 @@ void fill_argv(char *tmp_argv)
 	_strncat(my_argv[index], "\0", 1);
 }
 
+/**
+ * copy_envp - Copy envp
+ * @envp: double pointer to envp
+ * Return: Nothing
+ */
 void copy_envp(char **envp)
 {
 	int index = 0;
@@ -85,6 +106,11 @@ void copy_envp(char **envp)
 	}
 }
 
+/**
+ * call_execve - Call execve
+ * @cmd: cmd
+ * Return: Nothing
+ */
 void call_execve(char *cmd)
 {
 	int i;
@@ -106,6 +132,12 @@ void call_execve(char *cmd)
 	}
 }
 
+/**
+ * get_pathstring - Get pathstring
+ * @tmp_envp: tmp_envp
+ * @bin_path: bin_path
+ * Return: Nothing
+ */
 void get_pathstring(char **tmp_envp, char *bin_path)
 {
 	int count = 0;
@@ -124,6 +156,11 @@ void get_pathstring(char **tmp_envp, char *bin_path)
         _strncpy(bin_path, tmp, _strlen(tmp));
 }
 
+/**
+ * attach_path - Attach the path
+ * @cmd: cmd
+ * Return: 0
+ */
 int attach_path(char *cmd)
 {
 	char ret[100];
@@ -144,6 +181,10 @@ int attach_path(char *cmd)
 	return (0);
 }
 
+/**
+ * free_argv - Free argv
+ * Return: Nothing
+ */
 void free_argv()
 {
 	int index;
@@ -155,6 +196,13 @@ void free_argv()
 	}
 }
 
+/**
+ * main - Entry point
+ * @argc: number of arguments
+ * @argv: pointer to array of arguments
+ * @envp: pointer to array of envp
+ * Return: 0 (Success)
+ */
 int main(int argc, char *argv[], char *envp[])
 {
 	char c;

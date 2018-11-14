@@ -13,9 +13,10 @@ static char *my_argv[100];
 void handle_signal(int signo)
 {
 	(void)signo;
-	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 34);
+	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 	fflush(stdout);
 }
+
 
 /**
  * insert_pathstr_to_search - Insert pathstring to search
@@ -284,6 +285,8 @@ int main(int argc, char *argv[], char *envp[])
 	free(tmp);
 	free(cmd);
 	free(pathstr);
+	for (i = 0; my_argv[i] != NULL; i++)
+		free(my_argv[i]);
 	for (i = 0; my_envp[i] != NULL; i++)
 		free(my_envp[i]);
 	for (i = 0; i < 10; i++)

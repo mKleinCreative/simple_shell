@@ -1,9 +1,6 @@
 #include "shell.h"
 
 extern int errno;
-static char *my_envp[100];
-static char *search_path[10];
-static char *my_argv[100];
 
 /**
  * handle_signal - Handle signal
@@ -23,7 +20,7 @@ void handle_signal(int signo)
  * @pathstr: pathstr
  * Return: Nothing
  */
-void insert_pathstr_to_search(char *pathstr)
+void insert_pathstr_to_search(char *pathstr, char **search_path)
 {
 	int index = 0;
 	char *tmp = pathstr;
@@ -56,13 +53,12 @@ void insert_pathstr_to_search(char *pathstr)
  * @tmp_argv: temporary argv
  * Return: Nothing
  */
-void fill_argv(char *tmp_argv)
+void fill_argv(char *tmp_argv, char **my_argv)
 {
 	char *copy_argv;
 	int index = 0;
 	char ret[100];
 
-	(void)my_envp;
 	copy_argv = tmp_argv;
 	_memset(ret, 0, 100);
 	while (*copy_argv != '\0')
@@ -97,7 +93,7 @@ void fill_argv(char *tmp_argv)
  * @envp: double pointer to envp
  * Return: Nothing
  */
-void copy_envp(char **envp)
+void copy_envp(char **envp, char **my_envp)
 {
 	int index = 0;
 	for (;envp[index] != NULL; index++)
@@ -112,7 +108,7 @@ void copy_envp(char **envp)
  * @cmd: cmd
  * Return: Nothing
  */
-void call_execve(char *cmd)
+void call_execve(char *cmd, char **my_envp, char **my_argv)
 {
 	int i;
 
@@ -162,7 +158,7 @@ void get_pathstring(char **tmp_envp, char *bin_path)
  * @cmd: cmd
  * Return: 0
  */
-int attach_path(char *cmd)
+int attach_path(char *cmd, char **search_path)
 {
 	char ret[100];
 	int index;
@@ -186,7 +182,7 @@ int attach_path(char *cmd)
  * free_argv - Free argv
  * Return: Nothing
  */
-void free_argv()
+void free_argv(char **my_argv)
 {
 	int index;
 	for (index=0; my_argv[index] != NULL; index++)
@@ -210,15 +206,18 @@ int main(int argc, char *argv[], char *envp[])
 	int i, fd;
 	char *tmp = (char *)malloc(sizeof(char) * 100);
 	char *pathstr = (char *)malloc(sizeof(char) * 256);
+	static char *my_envp[100];
+	static char *search_path[10];
+	static char *my_argv[100];
 	char *cmd = (char *)malloc(sizeof(char) * 100);
 	(void)argc;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGINT, handle_signal);
 
-	copy_envp(envp);
+	copy_envp(envp, my_envp);
 	get_pathstring(my_envp, pathstr);
-	insert_pathstr_to_search(pathstr);
+	insert_pathstr_to_search(pathstr, search_path);
 
 	if (fork() == 0)
 	{
@@ -249,14 +248,14 @@ int main(int argc, char *argv[], char *envp[])
 					write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 				} else
 				{
-					fill_argv(tmp);
+					fill_argv(tmp, my_argv);
 					_strncpy(cmd, my_argv[0], _strlen(my_argv[0]));
 					_strncat(cmd, "\0", 1);
 					if (index(cmd, '/') == NULL)
 					{
-						if (attach_path(cmd) == 0)
+						if (attach_path(cmd, search_path) == 0)
 						{
-							call_execve(cmd);
+							call_execve(cmd, my_envp, my_argv);
 						} else
 						{
 							write(STDERR_FILENO, "command not found\n", 15);
@@ -266,13 +265,13 @@ int main(int argc, char *argv[], char *envp[])
 						if ((fd = open(cmd, O_RDONLY)) > 0)
 						{
 							close(fd);
-							call_execve(cmd);
+							call_execve(cmd, my_envp, my_argv);
 						} else
 						{
 							write(STDERR_FILENO, "command not found\n", 15);
 						}
 					}
-					free_argv();
+					free_argv(my_argv);
 					write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 					_memset(cmd, 0, 100);
 				}

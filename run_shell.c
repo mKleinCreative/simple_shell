@@ -21,7 +21,7 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 	fill_argv(tmp, my_argv);
 	_strncpy(cmd, my_argv[0], _strlen(my_argv[0]));
 	_strncat(cmd, "\0", 1);
-	if (index(cmd, '/') == NULL)
+	if (_strchr(cmd, '/') == NULL)
 	{
 		if (attach_path(cmd, search_path) == 0)
 		{

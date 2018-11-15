@@ -3,7 +3,7 @@
 <img src="https://svgsilh.com/svg/576487.svg" alt="Simple Shell">
 
 ## DESCRIPTION
-A simple UNIX command interpreter created for Holberton School as a partner project with Michael Klein (@mkleincreative) and Wendy Leung (@wendyblogtech).
+A simple UNIX command interpreter created for Holberton School as a partner project with Michael Klein and Wendy Leung.
 
 ## REQUIREMENTS
 

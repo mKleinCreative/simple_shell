@@ -15,6 +15,7 @@
 #include <fcntl.h>
 /* variables and typedefs */
 typedef void (*sighandler_t)(int);
+extern int errno;
 /* functions */
 void fill_argv(char *tmp_argv, char **my_argv);
 char *_strcat(char *dest, char *src);
@@ -32,4 +33,9 @@ void copy_envp(char **envp, char **my_envp);
 int _strcmp(char *s1, char *s2);
 void call_execve(char *cmd, char **my_envp, char **my_argv);
 int _getchar(void);
+void free_argv(char **my_argv);
+void print_crab();
+void clear(char **argv, char **my_envp);
+void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp);
+char *_strchr(char *s, char c);
 #endif

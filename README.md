@@ -53,10 +53,11 @@ Compile simple_shell this way: `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`.
 
 ```
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+```
 Execute the shell.
 ```
 ./hsh
-
+```
 ## SYNTAX
 You can use the same syntax for running commands in other shells:
 ```
@@ -65,15 +66,16 @@ You can use the same syntax for running commands in other shells:
 In non-interactive mode:
 ```
 <command> | ./hsh
-
+```
 ## EXAMPLE
 Interactive mode:
 ```
 /bin/ls
+```
 Non-interactive mode
 ```
 echo "/bin/ls" | ./hsh
-
+```
 ## BUILTINS
 `exit` - exit the shell
 
@@ -81,5 +83,6 @@ echo "/bin/ls" | ./hsh
 No bugs are known
 
 ## AUTHORS
+
 **Michael Klein** [Github](https://github.com/mKleinCreative)
 **Wendy Leung** [Github](https://github.com/wendyblogtech)

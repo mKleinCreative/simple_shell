@@ -80,7 +80,7 @@ echo "/bin/ls" | ./hsh
 `exit` - exit the shell
 
 ## BUGS
-No bugs are known
+Memory problems and exit does not work
 
 ## AUTHORS
 

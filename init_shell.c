@@ -45,9 +45,12 @@ int main(int argc, char *argv[], char *envp[])
 			case '\n':
 				if (tmp[0] == '\0')
 				{
-					write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
+					write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
 				} else
+				{
 					run_shell(my_argv, my_envp, search_path, tmp);
+					write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
+				}
 				_memset(tmp, 0, 100);
 				break;
 			default:

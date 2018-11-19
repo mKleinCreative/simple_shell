@@ -45,6 +45,5 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 		}
 	}
 	free_argv(my_argv);
-	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 	_memset(cmd, 0, 100);
 }

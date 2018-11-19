@@ -18,7 +18,7 @@ typedef void (*sighandler_t)(int);
 extern int errno;
 /* functions */
 void fill_argv(char *tmp_argv, char **my_argv);
-char *_strcat(char *dest, char *src);
+char *_strcat(char *dest, int src);
 int _strlen(char *s);
 char *_strstr(char *haystack, char *needle);
 char *_strncpy(char *dest, char *src, int n);

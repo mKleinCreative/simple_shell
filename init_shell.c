@@ -22,7 +22,7 @@ void handle_signal(int signo __attribute__((unused)))
 int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 {
 	int i, c;
-	char *pathstr, *tmp, letter;
+	char *pathstr, *tmp;
 	static char *my_envp[100], *search_path[10], *my_argv[100];
 
 	tmp = (char *)malloc(sizeof(char) * 100);
@@ -45,8 +45,7 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 	clear(argv, my_envp);
 	while ((c = _getchar()) != EOF)
 	{
-		letter = c + '0';
-		if (letter == '\n')
+		if (c == '\n')
 		{
 			if (tmp[0] == '\0')
 			{
@@ -59,7 +58,7 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 			_memset(tmp, 0, 100);
 		} else
 		{
-				_strncat(tmp, &letter, 1);
+				_strcat(tmp, c);
 		}
 	}
 	free(pathstr);

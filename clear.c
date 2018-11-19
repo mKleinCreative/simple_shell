@@ -15,6 +15,6 @@ void clear(char **argv, char **my_envp)
 	{
 		wait(NULL);
 	}
-	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
+	write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
 	fflush(stdout);
 }

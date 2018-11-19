@@ -28,7 +28,8 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 			call_execve(cmd, my_envp, my_argv);
 		} else
 		{
-			write(STDERR_FILENO, "command not found\n", 19);
+			write(STDERR_FILENO, cmd, _strlen(cmd));
+			write(STDERR_FILENO, " not found\n", 12);
 		}
 	} else
 	{
@@ -39,7 +40,8 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 			call_execve(cmd, my_envp, my_argv);
 		} else
 		{
-			write(STDERR_FILENO, "command not found\n", 19);
+			write(STDERR_FILENO, cmd, _strlen(cmd));
+			write(STDERR_FILENO, " not found\n", 12);
 		}
 	}
 	free_argv(my_argv);

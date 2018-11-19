@@ -15,10 +15,10 @@ void call_execve(char *cmd, char **my_envp, char **my_argv)
 	if (fork() == 0)
 	{
 		i = execve(cmd, my_argv, my_envp);
-		write(STDERR_FILENO, "error executing\n", 17);
 		if (i < 0)
 		{
-			write(STDERR_FILENO, "command not found\n", 19);
+			write(STDERR_FILENO, cmd, _strlen(cmd));
+			write(STDERR_FILENO, ": not found\n", 13);
 			exit(1);
 		}
 	} else

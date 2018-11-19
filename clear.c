@@ -15,6 +15,5 @@ void clear(char **argv, char **my_envp)
 	{
 		wait(NULL);
 	}
-	print_crab();
 	fflush(stdout);
 }

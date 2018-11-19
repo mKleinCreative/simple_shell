@@ -20,48 +20,52 @@ void handle_signal(int signo)
  * Return: 0 (Success)
  */
 
-int main(int argc, char *argv[], char *envp[])
+int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 {
-	int i;
-	char *tmp = (char *)malloc(sizeof(char) * 100);
-	char c;
-	char *pathstr = (char *)malloc(sizeof(char) * 256);
-	static char *my_envp[100];
-	static char *search_path[10];
-	static char *my_argv[100];
-	(void)argc;
+	int i, c;
+	char *pathstr, *tmp;
+	static char *my_envp[100] *search_path[10] *my_argv[100];
 
+	tmp = (char *)malloc(sizeof(char) * 100);
+	pathstr = (char *)malloc(sizeof(char) * 256);
+	if (!pathstr)
+	{
+		free(pathstr);
+		exit(1);
+	}
+	if (!tmp)
+	{
+		free(tmp);
+		exit(1);
+	}
 	signal(SIGINT, SIG_IGN);
 	signal(SIGINT, handle_signal);
 	copy_envp(envp, my_envp);
 	get_path_string(my_envp, pathstr);
 	insert_pathstr_to_search(pathstr, search_path);
 	clear(argv, my_envp);
-	while (c != EOF)
+	while ((c = _getchar) != EOF)
 	{
-		c = _getchar();
-		switch (c)
+		if (c == '\n')
 		{
-			case '\n':
-				if (tmp[0] == '\0')
-				{
-					write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
-				} else
-				{
-					run_shell(my_argv, my_envp, search_path, tmp);
-					write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
-				}
-				_memset(tmp, 0, 100);
-				break;
-			default:
+			if (tmp[0] == '\0')
+			{
+				write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
+			} else
+			{
+				run_shell(my_argv, my_envp, search_path, tmp);
+				write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
+			}
+			_memset(tmp, 0, 100);
+		} else
+		{
 				_strncat(tmp, &c, 1);
-				break;
 		}
 	}
 	free(pathstr);
 	for (i = 0; my_envp[i] != NULL; i++)
 		free(my_envp[i]);
-	for (i = 0; i < 10; i++)
+	for (i = 0; search_path[i] != '\0'; i++)
 		free(search_path[i]);
 	write(STDOUT_FILENO, "\n", 1);
 	return (0);

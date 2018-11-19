@@ -22,5 +22,4 @@ void get_path_string(char **tmp_envp, char *bin_path)
 			break;
 	}
 	_strncpy(bin_path, tmp, _strlen(tmp));
-	free(tmp);
 }

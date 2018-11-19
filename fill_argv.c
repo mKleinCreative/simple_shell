@@ -38,6 +38,8 @@ void fill_argv(char *tmp_argv, char **my_argv)
 		copy_argv++;
 	}
 	my_argv[index] = (char *)malloc(sizeof(char) * _strlen(ret) + 1);
+	if (!my_argv[index])
+		free(my_argv);
 	_strncpy(my_argv[index], ret, _strlen(ret));
 	_strncat(my_argv[index], "\0", 1);
 }

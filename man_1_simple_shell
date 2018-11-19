@@ -1,0 +1,56 @@
+.TH SIMPLE SHELL 1 "NOVEMBER 2018" SIMPLE SHELL "simple shell User Manual"
+.SH NAME
+simple shell \- building a shell
+.SH SYNOPSIS
+.B
+#include "shell.h"
+.B
+
+command [options] [file]
+.SH DESCRIPTION
+.B simple shell
+is a custom version of a command language interpreter that
+executes commands read from the standard input or from a file.
+.SH OPTIONS
+.IP -i
+If the -i option is present, the shell is interactive
+
+.SH SYNTAX
+.IP
+.PP
+.nf
+
+To execute the shell:
+
+./hsh
+
+You can use the same syntax for running commands in other shells:
+
+<command> <flags or options> <argument 1> <argument 2> ...
+
+In non-interactive mode:
+
+<command> | ./hsh
+
+.SH EXAMPLE
+.IP
+.PP
+.NF
+
+Interactive mode:
+
+/bin/ls
+
+Non-interactive mode:
+
+echo "/bin/ls" | ./hsh
+
+.IP
+.SH BUGS
+Memory leaks
+
+.SH AUTHOR
+Michael Klein and Wendy Leung
+
+.SH "SEE ALSO"
+.BR sh (1)

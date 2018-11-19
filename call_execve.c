@@ -12,8 +12,6 @@ void call_execve(char *cmd, char **my_envp, char **my_argv)
 {
 	int i;
 
-	write(STDOUT_FILENO, cmd, _strlen(cmd));
-	write(STDOUT_FILENO, "\n", 1);
 	if (fork() == 0)
 	{
 		i = execve(cmd, my_argv, my_envp);

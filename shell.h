@@ -34,7 +34,7 @@ int _strcmp(char *s1, char *s2);
 void call_execve(char *cmd, char **my_envp, char **my_argv);
 int _getchar(void);
 void free_argv(char **my_argv);
-void print_crab();
+void print_crab(void);
 void clear(char **argv, char **my_envp);
 void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp);
 char *_strchr(char *s, char c);

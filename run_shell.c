@@ -28,7 +28,6 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 			call_execve(cmd, my_envp, my_argv);
 		} else
 		{
-			printf("cmd err === %s\n", cmd);
 			write(STDERR_FILENO, "command not found\n", 19);
 		}
 	} else

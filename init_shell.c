@@ -5,9 +5,8 @@
  * @signo: signo
  * Return: Nothing
  */
-void handle_signal(int signo)
+void handle_signal(int signo __attribute__((unused)))
 {
-	(void)signo;
 	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 	fflush(stdout);
 }
@@ -23,8 +22,8 @@ void handle_signal(int signo)
 int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 {
 	int i, c;
-	char *pathstr, *tmp;
-	static char *my_envp[100] *search_path[10] *my_argv[100];
+	char *pathstr, *tmp, letter;
+	static char *my_envp[100], *search_path[10], *my_argv[100];
 
 	tmp = (char *)malloc(sizeof(char) * 100);
 	pathstr = (char *)malloc(sizeof(char) * 256);
@@ -44,9 +43,10 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 	get_path_string(my_envp, pathstr);
 	insert_pathstr_to_search(pathstr, search_path);
 	clear(argv, my_envp);
-	while ((c = _getchar) != EOF)
+	while ((c = _getchar()) != EOF)
 	{
-		if (c == '\n')
+		letter = c + '0';
+		if (letter == '\n')
 		{
 			if (tmp[0] == '\0')
 			{
@@ -59,7 +59,7 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 			_memset(tmp, 0, 100);
 		} else
 		{
-				_strncat(tmp, &c, 1);
+				_strncat(tmp, &letter, 1);
 		}
 	}
 	free(pathstr);

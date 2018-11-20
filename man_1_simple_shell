@@ -47,7 +47,7 @@ echo "/bin/ls" | ./hsh
 
 .IP
 .SH BUGS
-Memory leaks
+Memory leaks and exit does not work
 
 .SH AUTHOR
 Michael Klein and Wendy Leung

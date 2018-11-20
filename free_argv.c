@@ -2,7 +2,7 @@
 
 /**
  * free_argv - Free argv
- * @my_argv: complied commandline input.
+ * @my_argv: compiled command line input.
  * Return: Nothing
  */
 void free_argv(char **my_argv)

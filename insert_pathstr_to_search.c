@@ -1,7 +1,8 @@
 #include "shell.h"
 
 /**
- * insert_pathstr_to_search - Insert pathstring to search
+ * insert_pathstr_to_search - Tokenizes the different paths and inserts
+ * them into a 2-D array
  * @pathstr: pathstr
  * @search_path: 2d array of all possible paths.
  * Return: Nothing

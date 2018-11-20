@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * fill_argv - Fill argv
+ * fill_argv - Tokenizes tmp buffer and stores result in my_argv
  * @tmp_argv: stream of data from input to put into argv
  * @my_argv: command line input.
  * Return: Nothing

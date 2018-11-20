@@ -5,6 +5,7 @@
  * @my_argv: argv input from init_shell
  * @my_envp: environment path from os
  * @search_path: tokenized paths to search through for commands
+ * tokenized version of environment path
  * @tmp: input from STDIN stream
  */
 
@@ -34,6 +35,7 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 		}
 	} else
 	{
+		/*full path*/
 		fd = open(cmd, O_RDONLY);
 		if (fd > 0)
 		{
@@ -47,5 +49,6 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 		}
 	}
 	free_argv(my_argv);
-	_memset(cmd, 0, 100);
+	free(cmd);
+	/*_memset(cmd, 0, 100);*/
 }

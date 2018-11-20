@@ -1,7 +1,8 @@
 #include "shell.h"
 
 /**
- * get_path_string - Get pathstring
+ * get_path_string - Removes the PATH= and gives you colon : separated
+ * value of entire string
  * @tmp_envp: tmp_envp
  * @bin_path: bin_path
  * Return: Nothing

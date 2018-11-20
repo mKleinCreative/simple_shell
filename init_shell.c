@@ -35,7 +35,7 @@ void checkmalloc(char *str)
 
 int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 {
-	int i, c;
+	int /*i,*/c;
 	char *pathstr, *tmp;
 	static char *my_envp[100], *search_path[10], *my_argv[100];
 
@@ -65,11 +65,12 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 		} else
 			_strcat(tmp, c);
 	}
+	free(tmp);
 	free(pathstr);
-	for (i = 0; my_envp[i] != NULL; i++)
+	/*for (i = 0; my_envp[i] != NULL; i++)
 		free(my_envp[i]);
 	for (i = 0; search_path[i] != '\0'; i++)
-		free(search_path[i]);
+		free(search_path[i]);*/
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, "\n", 1);
 	return (0);

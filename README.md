@@ -49,7 +49,12 @@ A simple UNIX command interpreter created for Holberton School as a partner proj
   * ```fflush``` (```man 3 fflush```)
 
 ## QUICK START
-Compile simple_shell this way: `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`.
+Git clone the repository:
+
+```
+git clone https://github.com/mKleinCreative/simple_shell.git
+```
+Compile simple_shell this way:
 
 ```
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh

@@ -11,17 +11,22 @@
 
 void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 {
-	int fd;
+	int fd, i;
 	char *cmd;
 
 	cmd = (char *)malloc(sizeof(char) * 100);
 	if (!cmd)
-	{
-		free(cmd);
 		exit(1);
-	}
 	fill_argv(tmp, my_argv);
-	_strncpy(cmd, my_argv[0], _strlen(my_argv[0]));
+	i = 0;
+	if (my_argv[i][0] == 0)
+	{
+		while (my_argv[i][0] == 0)
+		{
+			i++;
+		}
+	}
+	_strncpy(cmd, my_argv[i], _strlen(my_argv[i]));
 	_strncat(cmd, "\0", 1);
 	if (_strchr(cmd, '/') == NULL)
 	{

@@ -1,5 +1,7 @@
 #include "shell.h"
 
+char *remove_spaces(char *text);
+
 /**
  * fill_argv - Tokenizes tmp buffer and stores result in my_argv
  * @tmp_argv: stream of data from input to put into argv
@@ -13,7 +15,7 @@ void fill_argv(char *tmp_argv, char **my_argv)
 	int index = 0;
 	char ret[100];
 
-	copy_argv = tmp_argv;
+	copy_argv = remove_spaces(tmp_argv);
 	_memset(ret, 0, 100);
 	while (*copy_argv != '\0')
 	{

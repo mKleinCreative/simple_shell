@@ -17,6 +17,7 @@
 typedef void (*sighandler_t)(int);
 extern int errno;
 /* functions */
+char *remove_spaces(char *text);
 void fill_argv(char *tmp_argv, char **my_argv);
 char *_strcat(char *dest, int src);
 int _strlen(char *s);

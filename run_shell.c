@@ -11,20 +11,17 @@
 
 void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 {
-	int fd, i;
+	int fd, i = 0;
 	char *cmd;
 
-	cmd = (char *)malloc(sizeof(char) * 100);
+	cmd = (char *) malloc(sizeof(char) * 100);
 	if (!cmd)
 		exit(1);
 	fill_argv(tmp, my_argv);
-	i = 0;
 	if (my_argv[i][0] == 0)
 	{
 		while (my_argv[i][0] == 0)
-		{
 			i++;
-		}
 	}
 	_strncpy(cmd, my_argv[i], _strlen(my_argv[i]));
 	_strncat(cmd, "\0", 1);
@@ -40,7 +37,6 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 		}
 	} else
 	{
-		/*full path*/
 		fd = open(cmd, O_RDONLY);
 		if (fd > 0)
 		{
@@ -55,5 +51,4 @@ void run_shell(char **my_argv, char **my_envp, char **search_path, char *tmp)
 	}
 	free_argv(my_argv);
 	free(cmd);
-	/*_memset(cmd, 0, 100);*/
 }

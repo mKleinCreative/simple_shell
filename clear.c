@@ -7,8 +7,9 @@
  * @my_envp: parsed environment path
  * fflushes at end to make sure nothing is in the stream
  */
-void clear(char **argv __attribute__((unused)), char **my_envp __attribute__((unused)))
+void clear(char **argv __attribute__((unused)), char **my_envp)
 {
+	(void)my_envp;
 	if (fork() == 0)
 	{
 		exit(1);

@@ -11,16 +11,13 @@
 void insert_pathstr_to_search(char *pathstr, char **search_path)
 {
 	int index = 0;
-	char *tmp;
-	char *ret;
+	char *tmp = pathstr;
+	char ret[100];
 
-	tmp = pathstr;
-	ret = (char *) malloc(sizeof(char) * 100);
-	if (!ret)
-		exit(1);
 	while (*tmp != '=')
 		tmp++;
 	tmp++;
+
 	while (*tmp != '\0')
 	{
 		if (*tmp == ':')
@@ -37,5 +34,4 @@ void insert_pathstr_to_search(char *pathstr, char **search_path)
 		}
 		tmp++;
 	}
-	free(ret);
 }

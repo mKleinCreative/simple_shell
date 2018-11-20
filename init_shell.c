@@ -7,8 +7,22 @@
  */
 void handle_signal(int signo __attribute__((unused)))
 {
-	write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "\n(╯°□°)╯︵ ┻━┻ ===| ", 35);
 	fflush(stdout);
+}
+
+/**
+ * checkmalloc - Check if malloc succeeded
+ * @str: pointer to string
+ * Return: Nothing
+ */
+void checkmalloc(char *str)
+{
+	if (!str)
+	{
+		exit(1);
+	}
 }
 
 /**
@@ -27,16 +41,8 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 
 	tmp = (char *)malloc(sizeof(char) * 100);
 	pathstr = (char *)malloc(sizeof(char) * 256);
-	if (!pathstr)
-	{
-		free(pathstr);
-		exit(1);
-	}
-	if (!tmp)
-	{
-		free(tmp);
-		exit(1);
-	}
+	checkmalloc(pathstr);
+	checkmalloc(tmp);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGINT, handle_signal);
 	copy_envp(envp, my_envp);
@@ -47,25 +53,24 @@ int main(int argc __attribute__((unused)), char *argv[], char *envp[])
 	{
 		if (c == '\n')
 		{
-			if (tmp[0] == '\0')
-			{
+			if (tmp[0] == '\0' && isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
-			} else
+			else
 			{
 				run_shell(my_argv, my_envp, search_path, tmp);
-				write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
+				if (isatty(STDIN_FILENO))
+					write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
 			}
 			_memset(tmp, 0, 100);
 		} else
-		{
-				_strcat(tmp, c);
-		}
+			_strcat(tmp, c);
 	}
 	free(pathstr);
 	for (i = 0; my_envp[i] != NULL; i++)
 		free(my_envp[i]);
 	for (i = 0; search_path[i] != '\0'; i++)
 		free(search_path[i]);
-	write(STDOUT_FILENO, "\n", 1);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "\n", 1);
 	return (0);
 }

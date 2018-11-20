@@ -5,16 +5,16 @@
  * @argv: command line input to send to clear
  * @my_envp: parsed environtment path.
  */
-void clear(char **argv, char **my_envp)
+void clear(char **argv __attribute__((unused)), char **my_envp __attribute__((unused)))
 {
 	if (fork() == 0)
 	{
-		execve("/usr/bin/clear", argv, my_envp);
 		exit(1);
 	} else
 	{
 		wait(NULL);
 	}
-	write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "(╯°□°)╯︵ ┻━┻ ===| ", 34);
 	fflush(stdout);
 }

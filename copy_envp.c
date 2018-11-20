@@ -15,7 +15,7 @@ void copy_envp(char **envp, char **my_envp)
 
 	for (; envp[index] != NULL; index++)
 	{
-		my_envp[index] = (char *)malloc(sizeof(char) * (_strlen(envp[index]) + 1));
+		my_envp[index] = malloc(sizeof(char * ) * (_strlen(envp[index]) + 1));
 		_memcpy(my_envp[index], envp[index], _strlen(envp[index]));
 	}
 }
